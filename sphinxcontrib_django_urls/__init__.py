@@ -6,7 +6,7 @@ except:
     except:
         raise Exception("Can't find Django")
 
-__version__ = "0.1"
+__version__ = "0.2"
 
 def setup(app):
     app.connect('autodoc-process-docstring', add_django_url)
@@ -22,7 +22,7 @@ def add_django_url(app, what, name, obj, options, lines):
 
                 for url in url_struct[:-2]:
                     if type(url) == type([]): continue
-                    lines.append("   * %s\n" % url)
+                    lines.append("   * %s\n" % url.replace("\\Z", '$'))
             else:
                 lines.insert(0,"| has NO URL mapping\n")
         else:
